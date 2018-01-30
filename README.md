@@ -3,4 +3,4 @@ PyTorch Implementation of the paper Learning Affinity via Spatial Propagation Ne
 
 [Work in Progress]
 
-
+FCN-8 Model from https://github.com/wkentaro/pytorch-fcn
