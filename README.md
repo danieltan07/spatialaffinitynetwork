@@ -18,3 +18,23 @@ The paper propose to learn a spatial affinity matrix by consturcting a row-wise 
 
 ![alt text](https://github.com/danieltan07/spatialaffinitynetwork/blob/master/fig2.PNG)
 
+```python
+    def to_tridiagonal_multidim(self, w):
+        N,W,C,D = w.size()
+        tmp_w = w / torch.sum(torch.abs(w),dim=3).unsqueeze(-1)
+        tmp_w = tmp_w.unsqueeze(2).expand([N,W,W,C,D])
+
+        eye_a = Variable(torch.diag(torch.ones(W-1).cuda(),diagonal=-1))
+        eye_b = Variable(torch.diag(torch.ones(W).cuda(),diagonal=0))
+        eye_c = Variable(torch.diag(torch.ones(W-1).cuda(),diagonal=1))
+
+        
+        tmp_eye_a = eye_a.unsqueeze(-1).unsqueeze(0).expand([N,W,W,C])
+        a = tmp_w[:,:,:,:,0] * tmp_eye_a
+        tmp_eye_b = eye_b.unsqueeze(-1).unsqueeze(0).expand([N,W,W,C])
+        b = tmp_w[:,:,:,:,1] * tmp_eye_b
+        tmp_eye_c = eye_c.unsqueeze(-1).unsqueeze(0).expand([N,W,W,C])
+        c = tmp_w[:,:,:,:,2] * tmp_eye_c
+
+        return a+b+c
+```
