@@ -12,3 +12,9 @@ The paper propose to learn a spatial affinity matrix by consturcting a row-wise 
 
 
 
+
+
+
+
+![alt text](https://github.com/danieltan07/spatialaffinitynetwork/blob/master/fig2.PNG)
+
